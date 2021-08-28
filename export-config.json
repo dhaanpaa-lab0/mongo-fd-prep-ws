@@ -1,0 +1,21 @@
+[
+  {
+    "database": "ga",
+    "collection": "tests",
+    "count": 50,
+    "content": {
+      "fieldName1": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 60,
+        "unique": true
+      },
+      "fieldName2": {
+        "type": "string",
+        "minLength": 10,
+        "maxLength": 60,
+        "unique": true
+      }
+    }
+  }
+]
