@@ -1,7 +1,8 @@
 OS := `uname`
 ARCH := `uname -m`
 MONGOEXPORTER := `which mongoexport`
-DB := "ga"
+# Change this variable to reflect the data to export from
+DB := "tests"
 
 clean:
 	rm -rfv ./generator
@@ -23,7 +24,7 @@ download-generator:
 generate: download-generator
 	./generator/mgodatagen -f export-config.json
 
-export: clean
+export:
 	mkdir -pv ./exports
 	./exporter/exportAsJson.sh ${DB} ./exports
 
