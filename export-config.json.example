@@ -1,0 +1,25 @@
+[
+  {
+    "database": "test",
+    "collection": "testData",
+    "count": 50,
+    "content": {
+      "testID": {
+        "type": "int",
+        "minInt": 10000,
+        "maxInt": 50000
+
+      },
+      "referenceID": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 50
+      },
+      "locationName": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 50
+      }
+    }
+  }
+]
