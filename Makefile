@@ -20,12 +20,15 @@ download-generator:
 	tar xzvf mgodatagen.tgz && \
 	cd ..
 
-generate: clean download-generator
+generate: download-generator
 	./generator/mgodatagen -f export-config.json
 
 export: clean
 	mkdir -pv ./exports
 	./exporter/exportAsJson.sh ${DB} ./exports
+
+copy-to-import: create-import-dir
+	cp -Rv ./exports/* ./imports
 
 create-import-dir:
 	mkdir -pv ./imports
