@@ -2,7 +2,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,webstorm+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,webstorm+all
 ### Local
-export-config.json
+./export-config.json
 downloadedSchemaFiles
 exports
 imports
