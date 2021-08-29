@@ -31,4 +31,5 @@ Uses the following tools
 | Environmental Variable | Purpose |
 | ---------------------- | ------------------------------------------ |
 | MONGOURI | Server to download current schema from |
+| MONGOSRCEXPURI | Server to export from |
 | MONGODESTIMPURI | Server to import test schema files to |
