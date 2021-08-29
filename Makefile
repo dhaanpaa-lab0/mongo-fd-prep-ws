@@ -3,33 +3,35 @@ ARCH := `uname -m`
 MONGOEXPORTER := `which mongoexport`
 DB := "ga"
 
-all: prereqs run
-
-prereqs:
-	mkdir -p ./generator
-	mkdir -p ./exports
-
 clean:
 	rm -rfv ./generator
-	mkdir -p ./generator
+	rm -rfv ./imports
 	rm -rfv ./exports
-	mkdir -p ./exports
 	rm -rfv ./downloadedSchemaFiles
 
 download-schema-from-host:
 	./analyzer/getSchemasFromHost.sh
+	./analyzer/getSchemasFromHostText.sh
 
-download:
+download-generator:
+	mkdir -pv ./generator
 	cd ./generator && \
 	wget https://github.com/feliixx/mgodatagen/releases/download/v0.9.2/mgodatagen_0.9.2_${OS}_${ARCH}.tar.gz -O mgodatagen.tgz && \
 	tar xzvf mgodatagen.tgz && \
 	cd ..
 
-generate: prereqs clean download
-	./generator/mgodatagen -f config.json
+generate: clean download-generator
+	./generator/mgodatagen -f export-config.json
 
-export: prereqs clean
+export: clean
+	mkdir -pv ./exports
 	./exporter/exportAsJson.sh ${DB} ./exports
 
-run: prereqs clean download
+create-import-dir:
+	mkdir -pv ./imports
+
+import:
+	./importer/importAsJson.sh
+
+
 
