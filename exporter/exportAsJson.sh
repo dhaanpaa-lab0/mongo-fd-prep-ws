@@ -13,10 +13,10 @@ else
   mkdir -p $out_dir
 fi
 
-tmp_file="fadlfhsdofheinwvw.js"
-echo "print('_ ' + db.getCollectionNames())" >$tmp_file
-cols=$(mongo "$db" $tmp_file | grep '_' | awk '{print $2}' | tr ',' ' ')
+tmp_file=$(mktemp /tmp/eaj.XXXXXXXXX.js)
+echo "print('_ ' + db.getCollectionNames())" >"$tmp_file"
+cols=$(mongo "$db" "$tmp_file" | grep '_' | awk '{print $2}' | tr ',' ' ')
 for c in $cols; do
   mongoexport --jsonArray --pretty -d "$db" -c "$c" -o "$out_dir/${c}.json"
 done
-rm $tmp_file
+rm "$tmp_file"

@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
-
 if [[ -z "${MONGODESTIMPURI}" ]]; then
   echo "You need to set the MONGODESTIMPURI environment variable or current shell var"
   exit 1
 fi
-out_dir=./imports
-if [[ ! -d $out_dir ]]; then
-  echo "You need to create directory $out_dir"
+
+IMPORT_DIRECTORY=./imports
+if [[ ! -d $IMPORT_DIRECTORY ]]; then
+  echo "You need to create directory $IMPORT_DIRECTORY"
   exit 1
 fi
 
-cols=$(ls imports)
+cols=$(ls $IMPORT_DIRECTORY)
 for file in $cols; do
   fileToImport=$(basename "$file")
-  c=${file/.json/}
-  echo "Importing $fileToImport to collection $c on $MONGODESTIMPURI"
-  mongoimport --uri="$MONGODESTIMPURI" --mode=merge --jsonArray -c "$c" --file="$out_dir/${fileToImport}"
+  COLLECTION_NAME=${file/.json/}
+  echo "Importing $fileToImport to collection $COLLECTION_NAME on $MONGODESTIMPURI"
+  mongoimport --uri="$MONGODESTIMPURI" --mode=merge --jsonArray -c "$COLLECTION_NAME" --file="$IMPORT_DIRECTORY/${fileToImport}"
 done
 
